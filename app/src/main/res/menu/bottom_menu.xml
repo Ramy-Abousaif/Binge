@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Home"
+        android:id="@+id/mainActivity"
+        android:icon="@drawable/ic_home" />
+    <item
+        android:title="Binge"
+        android:id="@+id/bingeFragment"
+        android:icon="@drawable/ic_binge" />
+    <item
+        android:title="Checklist"
+        android:id="@+id/checkListFragment"
+        android:icon="@drawable/ic_checklist" />
+    <item
+        android:title="Settings"
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_settings" />
+</menu>

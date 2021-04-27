@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/bingeFragment">
+
+    <fragment
+        android:id="@+id/bingeFragment"
+        android:name="com.example.binge.BingeFragment"
+        android:label="fragment_binge"
+        tools:layout="@layout/fragment_binge" />
+    <fragment
+        android:id="@+id/checkListFragment"
+        android:name="com.example.binge.CheckListFragment"
+        android:label="fragment_check_list"
+        tools:layout="@layout/fragment_check_list" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.binge.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.binge.MainActivity"
+        android:label="MainActivity" />
+</navigation>
