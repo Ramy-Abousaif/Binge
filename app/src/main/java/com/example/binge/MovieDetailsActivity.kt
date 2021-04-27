@@ -42,6 +42,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         } else {
             finish()
         }
+        setTitle("Movie Details")
     }
 
     private fun populateDetails(extras: Bundle) {
