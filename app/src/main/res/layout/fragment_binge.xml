@@ -11,4 +11,12 @@
         android:layout_centerInParent="true"
         android:text="Binge!"
         android:onClick="buttonBinge"/>
+
+    <TextView
+        android:id="@+id/snack_recommendation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/button_binge"
+        android:text=" " />
 </RelativeLayout>
