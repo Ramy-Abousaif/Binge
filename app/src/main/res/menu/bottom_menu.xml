@@ -3,18 +3,22 @@
 
     <item
         android:title="Home"
+        android:fontFamily="@font/exo"
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home" />
     <item
         android:title="Binge"
+        android:fontFamily="@font/exo"
         android:id="@+id/bingeFragment"
         android:icon="@drawable/ic_binge" />
     <item
         android:title="Checklist"
+        android:fontFamily="@font/exo"
         android:id="@+id/checkListFragment"
         android:icon="@drawable/ic_checklist" />
     <item
         android:title="Settings"
+        android:fontFamily="@font/exo"
         android:id="@+id/settingsFragment"
         android:icon="@drawable/ic_settings" />
 </menu>
