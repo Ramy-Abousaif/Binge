@@ -16,10 +16,9 @@ import org.w3c.dom.Text
 
 class BingeFragment: Fragment(), View.OnClickListener {
 
-    private lateinit var popularMovies: RecyclerView
     private lateinit var popularMoviesAdapter: MoviesAdapter
-    private lateinit var popularMoviesLayoutMgr: LinearLayoutManager
     private lateinit var text: TextView
+    private var generate: Boolean = false
     private val snacks: Array<String> = arrayOf(
         "How about some caramel popcorn to go with this one?",
         "How about some salted popcorn to go with this one?",
@@ -44,6 +43,7 @@ class BingeFragment: Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.fragment_binge, container, false)
+        popularMoviesAdapter = MoviesAdapter(mutableListOf()) { movie -> showMovieDetails(movie) }
         text = v.findViewById(R.id.snack_recommendation) as TextView
         val btn: Button = v.findViewById(R.id.button_binge)
         btn.setOnClickListener(this)
@@ -54,12 +54,17 @@ class BingeFragment: Fragment(), View.OnClickListener {
         when (v?.id) {
             R.id.button_binge -> {
                 text.setText(snacks[(0..(snacks.size - 1)).random()])
+                if(!generate)
+                {
+                    getRandomMovies()
+                    generate = true;
+                }
             }
         }
     }
 
-    private fun getPopularMovies() {
-        MoviesRepository.getPopularMovies(
+    private fun getRandomMovies() {
+        MoviesRepository.getRandomMovies(
             popularMoviesPage,
             ::onPopularMoviesFetched,
             ::onError
@@ -67,11 +72,13 @@ class BingeFragment: Fragment(), View.OnClickListener {
     }
 
     private fun attachPopularMoviesOnScrollListener() {
+        popularMoviesPage = (0..32220).random()
+        getRandomMovies()
     }
 
 
-    private fun onPopularMoviesFetched(movies: List<Movie>) {
-        popularMoviesAdapter.appendMovies(movies)
+    private fun onPopularMoviesFetched(movie: Movie) {
+        popularMoviesAdapter.appendMovie(movie)
         attachPopularMoviesOnScrollListener()
     }
 

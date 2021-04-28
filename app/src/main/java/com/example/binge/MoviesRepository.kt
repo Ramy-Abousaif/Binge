@@ -50,6 +50,38 @@ object MoviesRepository {
             })
     }
 
+    fun getRandomMovies(
+        page: Int = 1,
+        onSuccess: (movies: Movie) -> Unit,
+        onError: () -> Unit
+    ) {
+        api.getPopularMovies(page = page)
+            .enqueue(object : Callback<GetMoviesResponse> {
+                override fun onResponse(
+                    call: Call<GetMoviesResponse>,
+                    response: Response<GetMoviesResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()
+
+                        if (responseBody != null) {
+                            val randomMovieIndex = ((0..19).random() * page)
+                            onSuccess.invoke(responseBody.movies[randomMovieIndex])
+                            Log.d("Repository", "Movies: ${responseBody.movies[randomMovieIndex].title}")
+                        } else {
+                            onError.invoke()
+                        }
+                    } else {
+                        onError.invoke()
+                    }
+                }
+
+                override fun onFailure(call: Call<GetMoviesResponse>, t: Throwable) {
+                    onError.invoke()
+                }
+            })
+    }
+
     fun getTopRatedMovies(
         page: Int = 1,
         onSuccess: (movies: List<Movie>) -> Unit,

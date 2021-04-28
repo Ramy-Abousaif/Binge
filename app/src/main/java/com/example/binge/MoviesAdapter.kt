@@ -34,6 +34,10 @@ class MoviesAdapter(
         )
     }
 
+    fun appendMovie(movies: Movie) {
+        this.movies
+    }
+
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val poster: ImageView = itemView.findViewById(R.id.item_movie_poster)
