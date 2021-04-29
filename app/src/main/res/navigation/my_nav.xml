@@ -17,16 +17,4 @@
         android:fontFamily="@font/exo"
         android:label="Binge!"
         tools:layout="@layout/fragment_binge" />
-    <fragment
-        android:id="@+id/checkListFragment"
-        android:name="com.example.binge.CheckListFragment"
-        android:fontFamily="@font/exo"
-        android:label="Checklist"
-        tools:layout="@layout/fragment_check_list" />
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.example.binge.SettingsFragment"
-        android:fontFamily="@font/exo"
-        android:label="Settings"
-        tools:layout="@layout/fragment_settings" />
 </navigation>
