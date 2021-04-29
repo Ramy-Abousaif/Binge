@@ -10,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object MoviesRepository {
 
     private val api: Api
+    var randomMovie: String = ""
 
     init {
         val retrofit = Retrofit.Builder()
@@ -66,8 +67,9 @@ object MoviesRepository {
 
                         if (responseBody != null) {
                             val randomMovieIndex = ((0..19).random() * page)
-                            onSuccess.invoke(responseBody.movies[randomMovieIndex])
-                            Log.d("Repository", "Movies: ${responseBody.movies[randomMovieIndex].title}")
+                            //onSuccess.invoke(responseBody.movies[randomMovieIndex])
+                            randomMovie = responseBody.movies[randomMovieIndex].title
+                            Log.d("Repository", "Movies: ${randomMovie}")
                         } else {
                             onError.invoke()
                         }
@@ -80,6 +82,11 @@ object MoviesRepository {
                     onError.invoke()
                 }
             })
+    }
+
+    public fun randomMovie(): String
+    {
+        return randomMovie
     }
 
     fun getTopRatedMovies(

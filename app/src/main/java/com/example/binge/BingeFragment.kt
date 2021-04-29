@@ -2,7 +2,6 @@ package com.example.binge
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +9,12 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import org.w3c.dom.Text
 
 class BingeFragment: Fragment(), View.OnClickListener {
 
     private lateinit var popularMoviesAdapter: MoviesAdapter
-    private lateinit var text: TextView
+    private lateinit var snackText: TextView
+    private lateinit var movieText: TextView
     private var generate: Boolean = false
     private val snacks: Array<String> = arrayOf(
         "How about some caramel popcorn to go with this one?",
@@ -44,21 +41,20 @@ class BingeFragment: Fragment(), View.OnClickListener {
     ): View? {
         val v = inflater.inflate(R.layout.fragment_binge, container, false)
         popularMoviesAdapter = MoviesAdapter(mutableListOf()) { movie -> showMovieDetails(movie) }
-        text = v.findViewById(R.id.snack_recommendation) as TextView
+        snackText = v.findViewById(R.id.snack_recommendation) as TextView
+        movieText = v.findViewById(R.id.movie_recommendation) as TextView
         val btn: Button = v.findViewById(R.id.button_binge)
         btn.setOnClickListener(this)
+        getRandomMovies()
         return v;
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.button_binge -> {
-                text.setText(snacks[(0..(snacks.size - 1)).random()])
-                if(!generate)
-                {
-                    getRandomMovies()
-                    generate = true;
-                }
+                snackText.setText(snacks[(0..(snacks.size - 1)).random()])
+                getRandomMovies()
+                movieText.text = (MoviesRepository.randomMovie())
             }
         }
     }
