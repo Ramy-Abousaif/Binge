@@ -7,6 +7,7 @@ import android.widget.RatingBar
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import org.w3c.dom.Text
 
 const val MOVIE_BACKDROP = "extra_movie_backdrop"
 const val MOVIE_POSTER = "extra_movie_poster"
@@ -20,7 +21,8 @@ class MovieDetailsActivity : AppCompatActivity() {
     private lateinit var backdrop: ImageView
     private lateinit var poster: ImageView
     private lateinit var title: TextView
-    private lateinit var rating: RatingBar
+    private lateinit var ratingBar: RatingBar
+    private lateinit var ratingText: TextView
     private lateinit var releaseDate: TextView
     private lateinit var overview: TextView
 
@@ -31,7 +33,8 @@ class MovieDetailsActivity : AppCompatActivity() {
         backdrop = findViewById(R.id.movie_backdrop)
         poster = findViewById(R.id.movie_poster)
         title = findViewById(R.id.movie_title)
-        rating = findViewById(R.id.movie_rating)
+        ratingBar = findViewById(R.id.movie_rating_bar)
+        ratingText = findViewById(R.id.movie_rating_text)
         releaseDate = findViewById(R.id.movie_release_date)
         overview = findViewById(R.id.movie_overview)
 
@@ -61,7 +64,8 @@ class MovieDetailsActivity : AppCompatActivity() {
         }
 
         title.text = extras.getString(MOVIE_TITLE, "")
-        rating.rating = extras.getFloat(MOVIE_RATING, 0f) / 2
+        ratingBar.rating = extras.getFloat(MOVIE_RATING, 0f) / 2
+        ratingText.setText((extras.getFloat(MOVIE_RATING, 0f)).toString() + "/" + "10")
         releaseDate.text = extras.getString(MOVIE_RELEASE_DATE, "")
         overview.text = extras.getString(MOVIE_OVERVIEW, "")
     }

@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="movie_rating,movie_release_date" />
+            app:constraint_referenced_ids="movie_rating_text,movie_release_date" />
 
         <TextView
             android:id="@+id/movie_overview"
@@ -87,8 +87,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movie_poster_title_barrier" />
 
+        <TextView
+            android:id="@+id/trailer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="@string/trailer"
+            app:layout_constraintTop_toBottomOf="@+id/movie_overview"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
         <RatingBar
-            android:id="@+id/movie_rating"
+            android:id="@+id/movie_rating_bar"
             style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,5 +105,15 @@
             app:layout_constraintEnd_toEndOf="@+id/movie_poster_card"
             app:layout_constraintStart_toStartOf="@+id/movie_poster_card"
             app:layout_constraintTop_toBottomOf="@+id/movie_poster_card" />
+
+        <TextView
+            android:id="@+id/movie_rating_text"
+            android:fontFamily="@font/exo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/movie_rating_bar"
+            app:layout_constraintStart_toStartOf="@+id/movie_rating_bar"
+            app:layout_constraintTop_toBottomOf="@+id/movie_rating_bar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
