@@ -1,7 +1,12 @@
 package com.example.binge
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
@@ -16,7 +21,7 @@ const val MOVIE_RATING = "extra_movie_rating"
 const val MOVIE_RELEASE_DATE = "extra_movie_release_date"
 const val MOVIE_OVERVIEW = "extra_movie_overview"
 
-class MovieDetailsActivity : AppCompatActivity() {
+class MovieDetailsActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var backdrop: ImageView
     private lateinit var poster: ImageView
@@ -45,6 +50,10 @@ class MovieDetailsActivity : AppCompatActivity() {
         } else {
             finish()
         }
+
+        val btn: Button = findViewById(R.id.button_link)
+        btn.setOnClickListener(this)
+
         setTitle("Movie Details")
     }
 
@@ -68,5 +77,21 @@ class MovieDetailsActivity : AppCompatActivity() {
         ratingText.setText((extras.getFloat(MOVIE_RATING, 0f)).toString() + "/" + "10")
         releaseDate.text = extras.getString(MOVIE_RELEASE_DATE, "")
         overview.text = extras.getString(MOVIE_OVERVIEW, "")
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.button_link -> {
+                var searchTitle: String = title.text.toString().replace(" ", "+")
+                var finalTitle: String = searchTitle.replace("'", "") + "+trailer"
+                goToURL("https://www.youtube.com/results?search_query=" + finalTitle)
+            }
+        }
+    }
+
+    fun goToURL(s: String)
+    {
+        var uri: Uri = Uri.parse(s)
+        startActivity(Intent(Intent.ACTION_VIEW, uri))
     }
 }

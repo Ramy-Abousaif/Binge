@@ -33,10 +33,4 @@ interface Api {
     fun getGenre(
         @Query("api_key") apiKey: String = "9e1b281c7090884268f7269a0f11525f"
     ): Call<GetMoviesResponse>
-
-    @GET("movie/{movie_id}/videos")
-    fun getVideo(
-        @Query("api_key") apiKey: String = "9e1b281c7090884268f7269a0f11525f",
-        @Query("movie_id") id: Int
-    ): Call<GetMoviesResponse>
 }
