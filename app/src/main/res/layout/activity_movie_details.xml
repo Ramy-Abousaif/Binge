@@ -96,6 +96,15 @@
             app:layout_constraintTop_toBottomOf="@+id/movie_overview"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/trailer"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
         <RatingBar
             android:id="@+id/movie_rating_bar"
             style="@style/Widget.AppCompat.RatingBar.Small"

@@ -1,4 +1,5 @@
 package com.example.binge
+
 import com.google.gson.annotations.SerializedName
 
 data class Movie(

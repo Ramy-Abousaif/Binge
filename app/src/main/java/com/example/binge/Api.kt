@@ -2,6 +2,7 @@ package com.example.binge
 
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface Api {
@@ -35,8 +36,8 @@ interface Api {
     ): Call<GetMoviesResponse>
 
     @GET("movie/{movie_id}/videos")
-    fun getVideo(
+    fun getMovieTrailer(
         @Query("api_key") apiKey: String = "9e1b281c7090884268f7269a0f11525f",
-        @Query("movie_id") id: Int
-    ): Call<GetMoviesResponse>
+        @Path("movie_id") id: Int
+    ): Call<GetTrailerResponse>
 }
