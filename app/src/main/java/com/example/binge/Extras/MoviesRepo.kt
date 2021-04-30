@@ -1,6 +1,5 @@
-package com.example.binge
+package com.example.binge.Extras
 
-import android.util.Log
 import com.example.binge.Models.MovieModel
 import com.example.binge.Services.TMDBService
 import retrofit2.Call
@@ -30,10 +29,10 @@ object MoviesRepo {
         onError: () -> Unit
     ) {
         TMDB_SERVICE.getPopularMovies(page = page)
-            .enqueue(object : Callback<GetMoviesResponse> {
+            .enqueue(object : Callback<MoviesResponse> {
                 override fun onResponse(
-                    call: Call<GetMoviesResponse>,
-                    response: Response<GetMoviesResponse>
+                    call: Call<MoviesResponse>,
+                    response: Response<MoviesResponse>
                 ) {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
@@ -48,7 +47,7 @@ object MoviesRepo {
                     }
                 }
 
-                override fun onFailure(call: Call<GetMoviesResponse>, t: Throwable) {
+                override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
                     onError.invoke()
                 }
             })
@@ -59,10 +58,10 @@ object MoviesRepo {
         onError: () -> Unit
     ) {
         TMDB_SERVICE.getPopularMovies(page = (1..500).random())
-            .enqueue(object : Callback<GetMoviesResponse> {
+            .enqueue(object : Callback<MoviesResponse> {
                 override fun onResponse(
-                    call: Call<GetMoviesResponse>,
-                    response: Response<GetMoviesResponse>
+                    call: Call<MoviesResponse>,
+                    response: Response<MoviesResponse>
                 ) {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
@@ -79,7 +78,7 @@ object MoviesRepo {
                     }
                 }
 
-                override fun onFailure(call: Call<GetMoviesResponse>, t: Throwable) {
+                override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
                     onError.invoke()
                 }
             })
@@ -101,10 +100,10 @@ object MoviesRepo {
         onError: () -> Unit
     ) {
         TMDB_SERVICE.getTopRatedMovies(page = page)
-            .enqueue(object : Callback<GetMoviesResponse> {
+            .enqueue(object : Callback<MoviesResponse> {
                 override fun onResponse(
-                    call: Call<GetMoviesResponse>,
-                    response: Response<GetMoviesResponse>
+                    call: Call<MoviesResponse>,
+                    response: Response<MoviesResponse>
                 ) {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
@@ -119,7 +118,7 @@ object MoviesRepo {
                     }
                 }
 
-                override fun onFailure(call: Call<GetMoviesResponse>, t: Throwable) {
+                override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
                     onError.invoke()
                 }
             })
@@ -131,10 +130,10 @@ object MoviesRepo {
         onError: () -> Unit
     ) {
         TMDB_SERVICE.getUpcomingMovies(page = page)
-                .enqueue(object : Callback<GetMoviesResponse> {
+                .enqueue(object : Callback<MoviesResponse> {
                     override fun onResponse(
-                            call: Call<GetMoviesResponse>,
-                            response: Response<GetMoviesResponse>
+                        call: Call<MoviesResponse>,
+                        response: Response<MoviesResponse>
                     ) {
                         if (response.isSuccessful) {
                             val responseBody = response.body()
@@ -149,7 +148,7 @@ object MoviesRepo {
                         }
                     }
 
-                    override fun onFailure(call: Call<GetMoviesResponse>, t: Throwable) {
+                    override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
                         onError.invoke()
                     }
                 })

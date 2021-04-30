@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.binge.*
 import com.example.binge.Activities.*
 import com.example.binge.Adapters.MoviesAdapter
+import com.example.binge.Extras.MoviesRepo
 import com.example.binge.Models.MovieModel
 
 class HomeFragment : Fragment() {

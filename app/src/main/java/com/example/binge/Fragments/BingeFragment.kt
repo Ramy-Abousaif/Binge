@@ -13,12 +13,12 @@ import androidx.fragment.app.Fragment
 import com.example.binge.*
 import com.example.binge.Activities.*
 import com.example.binge.Adapters.MoviesAdapter
+import com.example.binge.Extras.MoviesRepo
 import com.example.binge.Models.MovieModel
 import com.squareup.picasso.Picasso
 
 class BingeFragment: Fragment(), View.OnClickListener {
 
-    private lateinit var popularMoviesAdapter: MoviesAdapter
     private lateinit var snackText: TextView
     private lateinit var movieText: TextView
     private lateinit var poster: ImageView
@@ -39,18 +39,12 @@ class BingeFragment: Fragment(), View.OnClickListener {
         "Something tangy or sour would suffice for this one!",
         "Grab a soda and enjoy the show!")
 
-    private var moviePage: Int = 1
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.fragment_binge, container, false)
-        popularMoviesAdapter =
-            MoviesAdapter(mutableListOf()) { movie ->
-                showMovieDetails(movie)
-            }
         snackText = v.findViewById(R.id.snack_recommendation) as TextView
         movieText = v.findViewById(R.id.movie_recommendation) as TextView
         poster = v.findViewById(R.id.movie_poster_binge) as ImageView
@@ -75,13 +69,9 @@ class BingeFragment: Fragment(), View.OnClickListener {
 
     private fun getRandomMovies() {
         MoviesRepo.getRandomMovies(
-            ::generateMovie,
+            ::getRandomMovies,
             ::onError
         )
-    }
-
-    private fun generateMovie() {
-        getRandomMovies()
     }
 
     private fun showMovieDetails(movieModel: MovieModel) {
