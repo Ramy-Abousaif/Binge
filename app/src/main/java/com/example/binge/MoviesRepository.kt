@@ -1,6 +1,8 @@
 package com.example.binge
 
 import android.util.Log
+import com.example.binge.Models.MovieModel
+import com.example.binge.Services.TMDBService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -9,8 +11,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object MoviesRepository {
 
-    private val api: Api
-    var randomMovie: String = ""
+    private val TMDB_SERVICE: TMDBService
+    var randomMovieTitle: String = ""
+    var randomMoviePoster: String? = ""
 
     init {
         val retrofit = Retrofit.Builder()
@@ -18,15 +21,15 @@ object MoviesRepository {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        api = retrofit.create(Api::class.java)
+        TMDB_SERVICE = retrofit.create(TMDBService::class.java)
     }
 
     fun getPopularMovies(
         page: Int = 1,
-        onSuccess: (movies: List<Movie>) -> Unit,
+        onSuccess: (movieModels: List<MovieModel>) -> Unit,
         onError: () -> Unit
     ) {
-        api.getPopularMovies(page = page)
+        TMDB_SERVICE.getPopularMovies(page = page)
             .enqueue(object : Callback<GetMoviesResponse> {
                 override fun onResponse(
                     call: Call<GetMoviesResponse>,
@@ -36,7 +39,7 @@ object MoviesRepository {
                         val responseBody = response.body()
 
                         if (responseBody != null) {
-                            onSuccess.invoke(responseBody.movies)
+                            onSuccess.invoke(responseBody.movieModels)
                         } else {
                             onError.invoke()
                         }
@@ -52,11 +55,10 @@ object MoviesRepository {
     }
 
     fun getRandomMovies(
-        page: Int = 1,
-        onSuccess: (movies: Movie) -> Unit,
+        onSuccess: () -> Unit,
         onError: () -> Unit
     ) {
-        api.getPopularMovies(page = page)
+        TMDB_SERVICE.getPopularMovies(page = (1..500).random())
             .enqueue(object : Callback<GetMoviesResponse> {
                 override fun onResponse(
                     call: Call<GetMoviesResponse>,
@@ -66,10 +68,9 @@ object MoviesRepository {
                         val responseBody = response.body()
 
                         if (responseBody != null) {
-                            val randomMovieIndex = ((0..19).random() * page)
-                            //onSuccess.invoke(responseBody.movies[randomMovieIndex])
-                            randomMovie = responseBody.movies[randomMovieIndex].title
-                            Log.d("Repository", "Movies: ${randomMovie}")
+                            val randomMovieIndex = ((0..19).random())
+                            randomMovieTitle = responseBody.movieModels[randomMovieIndex].title
+                            randomMoviePoster = responseBody.movieModels[randomMovieIndex].posterPath
                         } else {
                             onError.invoke()
                         }
@@ -84,17 +85,22 @@ object MoviesRepository {
             })
     }
 
-    public fun randomMovie(): String
+    public fun randomMovieTitle(): String
     {
-        return randomMovie
+        return randomMovieTitle
+    }
+
+    public fun randomMoviePoster(): String?
+    {
+        return randomMoviePoster
     }
 
     fun getTopRatedMovies(
         page: Int = 1,
-        onSuccess: (movies: List<Movie>) -> Unit,
+        onSuccess: (movieModels: List<MovieModel>) -> Unit,
         onError: () -> Unit
     ) {
-        api.getTopRatedMovies(page = page)
+        TMDB_SERVICE.getTopRatedMovies(page = page)
             .enqueue(object : Callback<GetMoviesResponse> {
                 override fun onResponse(
                     call: Call<GetMoviesResponse>,
@@ -104,7 +110,7 @@ object MoviesRepository {
                         val responseBody = response.body()
 
                         if (responseBody != null) {
-                            onSuccess.invoke(responseBody.movies)
+                            onSuccess.invoke(responseBody.movieModels)
                         } else {
                             onError.invoke()
                         }
@@ -120,11 +126,11 @@ object MoviesRepository {
     }
 
     fun getUpcomingMovies(
-            page: Int = 1,
-            onSuccess: (movies: List<Movie>) -> Unit,
-            onError: () -> Unit
+        page: Int = 1,
+        onSuccess: (movieModels: List<MovieModel>) -> Unit,
+        onError: () -> Unit
     ) {
-        api.getUpcomingMovies(page = page)
+        TMDB_SERVICE.getUpcomingMovies(page = page)
                 .enqueue(object : Callback<GetMoviesResponse> {
                     override fun onResponse(
                             call: Call<GetMoviesResponse>,
@@ -134,7 +140,7 @@ object MoviesRepository {
                             val responseBody = response.body()
 
                             if (responseBody != null) {
-                                onSuccess.invoke(responseBody.movies)
+                                onSuccess.invoke(responseBody.movieModels)
                             } else {
                                 onError.invoke()
                             }
@@ -150,10 +156,10 @@ object MoviesRepository {
     }
 
     fun getWatchProvider(
-        onSuccess: (movies: List<Movie>) -> Unit,
+        onSuccess: (movieModels: List<MovieModel>) -> Unit,
         onError: () -> Unit
     ) {
-        api.getWatchProviders()
+        TMDB_SERVICE.getWatchProviders()
             .enqueue(object : Callback<GetMoviesResponse> {
                 override fun onResponse(
                     call: Call<GetMoviesResponse>,
@@ -163,7 +169,7 @@ object MoviesRepository {
                         val responseBody = response.body()
 
                         if (responseBody != null) {
-                            onSuccess.invoke(responseBody.movies)
+                            onSuccess.invoke(responseBody.movieModels)
                         } else {
                             onError.invoke()
                         }
@@ -179,10 +185,10 @@ object MoviesRepository {
     }
 
     fun getGenre(
-        onSuccess: (movies: List<Movie>) -> Unit,
+        onSuccess: (movieModels: List<MovieModel>) -> Unit,
         onError: () -> Unit
     ) {
-        api.getGenre()
+        TMDB_SERVICE.getGenre()
             .enqueue(object : Callback<GetMoviesResponse> {
                 override fun onResponse(
                     call: Call<GetMoviesResponse>,
@@ -192,7 +198,7 @@ object MoviesRepository {
                         val responseBody = response.body()
 
                         if (responseBody != null) {
-                            onSuccess.invoke(responseBody.movies)
+                            onSuccess.invoke(responseBody.movieModels)
                         } else {
                             onError.invoke()
                         }

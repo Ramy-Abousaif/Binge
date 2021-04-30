@@ -7,10 +7,11 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.example.binge.Models.MovieModel
 
 class MoviesAdapter(
-    private var movies: MutableList<Movie>,
-    private val onMovieClick: (movie: Movie) -> Unit
+    private var movieModels: MutableList<MovieModel>,
+    private val onMovieClick: (movieModel: MovieModel) -> Unit
 ) : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -20,34 +21,30 @@ class MoviesAdapter(
         return MovieViewHolder(view)
     }
 
-    override fun getItemCount(): Int = movies.size
+    override fun getItemCount(): Int = movieModels.size
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(movies[position])
+        holder.bind(movieModels[position])
     }
 
-    fun appendMovies(movies: List<Movie>) {
-        this.movies.addAll(movies)
+    fun appendMovies(movieModels: List<MovieModel>) {
+        this.movieModels.addAll(movieModels)
         notifyItemRangeInserted(
-            this.movies.size,
-            movies.size - 1
+            this.movieModels.size,
+            movieModels.size - 1
         )
-    }
-
-    fun appendMovie(movies: Movie) {
-        this.movies
     }
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val poster: ImageView = itemView.findViewById(R.id.item_movie_poster)
 
-        fun bind(movie: Movie) {
+        fun bind(movieModel: MovieModel) {
             Glide.with(itemView)
-                .load("https://image.tmdb.org/t/p/w342${movie.posterPath}")
+                .load("https://image.tmdb.org/t/p/w342${movieModel.posterPath}")
                 .transform(CenterCrop())
                 .into(poster)
-            itemView.setOnClickListener { onMovieClick.invoke(movie) }
+            itemView.setOnClickListener { onMovieClick.invoke(movieModel) }
         }
     }
 }

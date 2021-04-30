@@ -1,4 +1,4 @@
-package com.example.binge
+package com.example.binge.Fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.binge.*
+import com.example.binge.Activities.*
+import com.example.binge.Models.MovieModel
 
 class HomeFragment : Fragment() {
 
@@ -40,7 +43,10 @@ class HomeFragment : Fragment() {
             false
         )
         popularMovies.layoutManager = popularMoviesLayoutMgr
-        popularMoviesAdapter = MoviesAdapter(mutableListOf()) { movie -> showMovieDetails(movie) }
+        popularMoviesAdapter =
+            MoviesAdapter(mutableListOf()) { movie ->
+                showMovieDetails(movie)
+            }
         popularMovies.adapter = popularMoviesAdapter
 
         topRatedMovies = v.findViewById(R.id.top_rated_movies)
@@ -50,7 +56,10 @@ class HomeFragment : Fragment() {
             false
         )
         topRatedMovies.layoutManager = topRatedMoviesLayoutMgr
-        topRatedMoviesAdapter = MoviesAdapter(mutableListOf()) { movie -> showMovieDetails(movie) }
+        topRatedMoviesAdapter =
+            MoviesAdapter(mutableListOf()) { movie ->
+                showMovieDetails(movie)
+            }
         topRatedMovies.adapter = topRatedMoviesAdapter
 
         upcomingMovies = v.findViewById(R.id.upcoming_movies)
@@ -60,7 +69,10 @@ class HomeFragment : Fragment() {
             false
         )
         upcomingMovies.layoutManager = upcomingMoviesLayoutMgr
-        upcomingMoviesAdapter = MoviesAdapter(mutableListOf()) { movie -> showMovieDetails(movie) }
+        upcomingMoviesAdapter =
+            MoviesAdapter(mutableListOf()) { movie ->
+                showMovieDetails(movie)
+            }
         upcomingMovies.adapter = upcomingMoviesAdapter
 
         getPopularMovies()
@@ -141,29 +153,29 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun onPopularMoviesFetched(movies: List<Movie>) {
-        popularMoviesAdapter.appendMovies(movies)
+    private fun onPopularMoviesFetched(movieModels: List<MovieModel>) {
+        popularMoviesAdapter.appendMovies(movieModels)
         attachPopularMoviesOnScrollListener()
     }
 
-    private fun onTopRatedMoviesFetched(movies: List<Movie>) {
-        topRatedMoviesAdapter.appendMovies(movies)
+    private fun onTopRatedMoviesFetched(movieModels: List<MovieModel>) {
+        topRatedMoviesAdapter.appendMovies(movieModels)
         attachTopRatedMoviesOnScrollListener()
     }
 
-    private fun onUpcomingMoviesFetched(movies: List<Movie>) {
-        upcomingMoviesAdapter.appendMovies(movies)
+    private fun onUpcomingMoviesFetched(movieModels: List<MovieModel>) {
+        upcomingMoviesAdapter.appendMovies(movieModels)
         attachUpcomingMoviesOnScrollListener()
     }
 
-    private fun showMovieDetails(movie: Movie) {
+    private fun showMovieDetails(movieModel: MovieModel) {
         val intent = Intent(this.context, MovieDetailsActivity::class.java)
-        intent.putExtra(MOVIE_BACKDROP, movie.backdropPath)
-        intent.putExtra(MOVIE_POSTER, movie.posterPath)
-        intent.putExtra(MOVIE_TITLE, movie.title)
-        intent.putExtra(MOVIE_RATING, movie.rating)
-        intent.putExtra(MOVIE_RELEASE_DATE, movie.releaseDate)
-        intent.putExtra(MOVIE_OVERVIEW, movie.overview)
+        intent.putExtra(MOVIE_BACKDROP, movieModel.backdropPath)
+        intent.putExtra(MOVIE_POSTER, movieModel.posterPath)
+        intent.putExtra(MOVIE_TITLE, movieModel.title)
+        intent.putExtra(MOVIE_RATING, movieModel.rating)
+        intent.putExtra(MOVIE_RELEASE_DATE, movieModel.releaseDate)
+        intent.putExtra(MOVIE_OVERVIEW, movieModel.overview)
         startActivity(intent)
     }
 

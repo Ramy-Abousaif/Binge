@@ -1,10 +1,11 @@
-package com.example.binge
+package com.example.binge.Services
 
+import com.example.binge.GetMoviesResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface Api {
+interface TMDBService {
 
     @GET("movie/popular")
     fun getPopularMovies(
