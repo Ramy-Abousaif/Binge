@@ -38,6 +38,18 @@ class HomeFragment : Fragment() {
      ): View? {
         val v = inflater.inflate(R.layout.fragment_home, container, false)
 
+        initPopularMovies(v)
+        initTopRatedMovies(v)
+        initUpcomingMovies(v)
+
+        getPopularMovies()
+        getTopRatedMovies()
+        getUpcomingMovies()
+        return v;
+    }
+
+    private fun initPopularMovies(v: View)
+    {
         popularMovies = v.findViewById(R.id.popular_movies)
         popularMoviesLayoutMgr = LinearLayoutManager(
             this.context,
@@ -50,7 +62,10 @@ class HomeFragment : Fragment() {
                 showMovieDetails(movie)
             }
         popularMovies.adapter = popularMoviesAdapter
+    }
 
+    private fun initTopRatedMovies(v: View)
+    {
         topRatedMovies = v.findViewById(R.id.top_rated_movies)
         topRatedMoviesLayoutMgr = LinearLayoutManager(
             this.context,
@@ -63,7 +78,10 @@ class HomeFragment : Fragment() {
                 showMovieDetails(movie)
             }
         topRatedMovies.adapter = topRatedMoviesAdapter
+    }
 
+    private fun initUpcomingMovies(v: View)
+    {
         upcomingMovies = v.findViewById(R.id.upcoming_movies)
         upcomingMoviesLayoutMgr = LinearLayoutManager(
             this.context,
@@ -76,34 +94,29 @@ class HomeFragment : Fragment() {
                 showMovieDetails(movie)
             }
         upcomingMovies.adapter = upcomingMoviesAdapter
-
-        getPopularMovies()
-        getTopRatedMovies()
-        getUpcomingMovies()
-        return v;
     }
 
     private fun getPopularMovies() {
         MoviesRepo.getPopularMovies(
             popularMoviesPage,
-            ::onPopularMoviesFetched,
-            ::onError
+            ::showPopularMovies,
+            ::showError
         )
     }
 
     private fun getTopRatedMovies() {
         MoviesRepo.getTopRatedMovies(
             topRatedMoviesPage,
-            ::onTopRatedMoviesFetched,
-            ::onError
+            ::showTopRatedMovies,
+            ::showError
         )
     }
 
     private fun getUpcomingMovies() {
         MoviesRepo.getUpcomingMovies(
             upcomingMoviesPage,
-            ::onUpcomingMoviesFetched,
-            ::onError
+            ::showUpcomingMovies,
+            ::showError
         )
     }
 
@@ -146,17 +159,17 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun onPopularMoviesFetched(movieModels: List<MovieModel>) {
+    private fun showPopularMovies(movieModels: List<MovieModel>) {
         popularMoviesAdapter.appendMovies(movieModels)
         attachPopularMoviesOnScrollListener()
     }
 
-    private fun onTopRatedMoviesFetched(movieModels: List<MovieModel>) {
+    private fun showTopRatedMovies(movieModels: List<MovieModel>) {
         topRatedMoviesAdapter.appendMovies(movieModels)
         attachTopRatedMoviesOnScrollListener()
     }
 
-    private fun onUpcomingMoviesFetched(movieModels: List<MovieModel>) {
+    private fun showUpcomingMovies(movieModels: List<MovieModel>) {
         upcomingMoviesAdapter.appendMovies(movieModels)
         attachUpcomingMoviesOnScrollListener()
     }
@@ -172,7 +185,7 @@ class HomeFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun onError() {
-        Toast.makeText(this.context, getString(R.string.error_fetch_movies), Toast.LENGTH_SHORT).show()
+    private fun showError() {
+        Toast.makeText(this.context, getString(R.string.error_message), Toast.LENGTH_SHORT).show()
     }
 }

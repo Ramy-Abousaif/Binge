@@ -54,7 +54,6 @@ object MoviesRepo {
     }
 
     fun getRandomMovies(
-        onSuccess: () -> Unit,
         onError: () -> Unit
     ) {
         TMDB_SERVICE.getPopularMovies(page = (1..500).random())

@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.binge.*
 import com.example.binge.Activities.*
-import com.example.binge.Adapters.MoviesAdapter
 import com.example.binge.Extras.MoviesRepo
 import com.example.binge.Models.MovieModel
 import com.squareup.picasso.Picasso
@@ -74,7 +73,6 @@ class BingeFragment: Fragment(), View.OnClickListener {
 
     private fun getRandomMovies() {
         MoviesRepo.getRandomMovies(
-            ::getRandomMovies,
             ::onError
         )
     }
@@ -91,6 +89,6 @@ class BingeFragment: Fragment(), View.OnClickListener {
     }
 
     private fun onError() {
-        Toast.makeText(this.context, getString(R.string.error_fetch_movies), Toast.LENGTH_SHORT).show()
+        Toast.makeText(this.context, getString(R.string.error_message), Toast.LENGTH_SHORT).show()
     }
 }

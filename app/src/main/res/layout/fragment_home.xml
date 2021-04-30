@@ -8,24 +8,24 @@
         android:orientation="vertical">
 
         <TextView
+            android:text="@string/popular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="26dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/popular"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:fontFamily="@font/exo" />
 
         <TextView
+            android:text="@string/most_popular_movies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="@font/exo"
-            android:text="@string/most_popular_movies" />
+            android:fontFamily="@font/exo" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/popular_movies"
@@ -37,24 +37,24 @@
             android:paddingEnd="16dp" />
 
         <TextView
+            android:text="@string/top_rated"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/top_rated"
             android:textColor="@android:color/white"
             android:fontFamily="@font/exo"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
+            android:text="@string/highest_rated_movies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="@font/exo"
-            android:text="@string/highest_rated_movies" />
+            android:fontFamily="@font/exo" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/top_rated_movies"
@@ -66,24 +66,24 @@
             android:paddingEnd="16dp" />
 
         <TextView
+            android:text="@string/upcoming"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/upcoming"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:fontFamily="@font/exo"
             android:textStyle="bold" />
 
         <TextView
+            android:text="@string/stay_updated"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="@font/exo"
-            android:text="@string/stay_updated" />
+            android:fontFamily="@font/exo" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/upcoming_movies"
