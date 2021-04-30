@@ -37,7 +37,12 @@ class BingeFragment: Fragment(), View.OnClickListener {
         "Grab a packet of Crisps and get ready!",
         "Grab some Oreos and enjoy the movie!",
         "Something tangy or sour would suffice for this one!",
-        "Grab a soda and enjoy the show!")
+        "Grab a soda and enjoy the show!",
+        "A bunch of cookies would go well with this",
+        "Yoooo Hot Dog?",
+        "Maybe grab a Cheeseburger?",
+        "Maybe you should order in for this one"
+        )
 
     override fun onCreateView(
         inflater: LayoutInflater,

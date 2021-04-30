@@ -5,7 +5,7 @@
         android:title="Home"
         android:fontFamily="@font/exo"
         android:id="@+id/homeFragment"
-        android:icon="@drawable/ic_home" />
+        android:icon="@drawable/ic_home"/>
     <item
         android:title="Binge"
         android:fontFamily="@font/exo"

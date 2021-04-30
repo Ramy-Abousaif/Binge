@@ -110,11 +110,8 @@ class HomeFragment : Fragment() {
     private fun attachPopularMoviesOnScrollListener() {
         popularMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val totalItemCount = popularMoviesLayoutMgr.itemCount
-                val visibleItemCount = popularMoviesLayoutMgr.childCount
-                val firstVisibleItem = popularMoviesLayoutMgr.findFirstVisibleItemPosition()
-
-                if (firstVisibleItem + visibleItemCount >= totalItemCount / 2) {
+                if (popularMoviesLayoutMgr.findFirstVisibleItemPosition() +
+                    popularMoviesLayoutMgr.childCount >= popularMoviesLayoutMgr.itemCount / 2) {
                     popularMovies.removeOnScrollListener(this)
                     popularMoviesPage++
                     getPopularMovies()
@@ -126,11 +123,8 @@ class HomeFragment : Fragment() {
     private fun attachTopRatedMoviesOnScrollListener() {
         topRatedMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val totalItemCount = topRatedMoviesLayoutMgr.itemCount
-                val visibleItemCount = topRatedMoviesLayoutMgr.childCount
-                val firstVisibleItem = topRatedMoviesLayoutMgr.findFirstVisibleItemPosition()
-
-                if (firstVisibleItem + visibleItemCount >= totalItemCount / 2) {
+                if (topRatedMoviesLayoutMgr.findFirstVisibleItemPosition() +
+                    topRatedMoviesLayoutMgr.childCount >= topRatedMoviesLayoutMgr.itemCount / 2) {
                     topRatedMovies.removeOnScrollListener(this)
                     topRatedMoviesPage++
                     getTopRatedMovies()
@@ -142,11 +136,8 @@ class HomeFragment : Fragment() {
     private fun attachUpcomingMoviesOnScrollListener() {
         upcomingMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val totalItemCount = upcomingMoviesLayoutMgr.itemCount
-                val visibleItemCount = upcomingMoviesLayoutMgr.childCount
-                val firstVisibleItem = upcomingMoviesLayoutMgr.findFirstVisibleItemPosition()
-
-                if (firstVisibleItem + visibleItemCount >= totalItemCount / 2) {
+                if (upcomingMoviesLayoutMgr.findFirstVisibleItemPosition() +
+                    upcomingMoviesLayoutMgr.childCount >= upcomingMoviesLayoutMgr.itemCount / 2) {
                     upcomingMovies.removeOnScrollListener(this)
                     upcomingMoviesPage++
                     getUpcomingMovies()
