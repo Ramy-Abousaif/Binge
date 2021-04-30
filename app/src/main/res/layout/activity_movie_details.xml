@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -50,6 +51,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:fontFamily="@font/exo"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -61,6 +63,7 @@
             android:id="@+id/movie_release_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/exo"
             android:textColor="#757575"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@+id/movie_title"
@@ -71,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="movie_rating,movie_release_date" />
+            app:constraint_referenced_ids="movie_rating_text,movie_release_date" />
 
         <TextView
             android:id="@+id/movie_overview"
@@ -80,18 +83,46 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:fontFamily="@font/exo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movie_poster_title_barrier" />
 
+        <Button
+            android:id="@+id/button_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/button"
+            android:fontFamily="@font/exo"
+            android:onClick="buttonLink"
+            android:text="Watch Trailer"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/movie_overview"
+            app:layout_constraintLeft_toLeftOf="@+id/movie_overview"
+            app:layout_constraintRight_toRightOf="@+id/movie_overview"
+            android:layout_marginTop="20dp"/>
+
         <RatingBar
-            android:id="@+id/movie_rating"
+            android:id="@+id/movie_rating_bar"
             style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:progressTint="#FF355A"
             app:layout_constraintEnd_toEndOf="@+id/movie_poster_card"
             app:layout_constraintStart_toStartOf="@+id/movie_poster_card"
             app:layout_constraintTop_toBottomOf="@+id/movie_poster_card" />
+
+        <TextView
+            android:id="@+id/movie_rating_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/exo"
+            app:layout_constraintEnd_toEndOf="@+id/movie_rating_bar"
+            app:layout_constraintStart_toStartOf="@+id/movie_rating_bar"
+            app:layout_constraintTop_toBottomOf="@+id/movie_rating_bar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
