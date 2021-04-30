@@ -90,13 +90,13 @@
 
         <Button
             android:id="@+id/button_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="125dp"
+            android:layout_height="50dp"
             android:layout_centerInParent="true"
             android:background="@drawable/button"
             android:fontFamily="@font/exo"
             android:onClick="buttonLink"
-            android:text="Watch Trailer"
+            android:text="@string/watch_trailer"
             android:textAllCaps="false"
             android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@+id/movie_overview"

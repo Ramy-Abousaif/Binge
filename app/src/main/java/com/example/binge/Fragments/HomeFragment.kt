@@ -120,7 +120,7 @@ class HomeFragment : Fragment() {
         )
     }
 
-    private fun attachPopularMoviesOnScrollListener() {
+    private fun popularMoviesOnScrollListener() {
         popularMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (popularMoviesLayoutMgr.findFirstVisibleItemPosition() +
@@ -133,7 +133,7 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun attachTopRatedMoviesOnScrollListener() {
+    private fun topRatedMoviesOnScrollListener() {
         topRatedMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (topRatedMoviesLayoutMgr.findFirstVisibleItemPosition() +
@@ -146,7 +146,7 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun attachUpcomingMoviesOnScrollListener() {
+    private fun upcomingMoviesOnScrollListener() {
         upcomingMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (upcomingMoviesLayoutMgr.findFirstVisibleItemPosition() +
@@ -161,17 +161,17 @@ class HomeFragment : Fragment() {
 
     private fun showPopularMovies(movieModels: List<MovieModel>) {
         popularMoviesAdapter.appendMovies(movieModels)
-        attachPopularMoviesOnScrollListener()
+        popularMoviesOnScrollListener()
     }
 
     private fun showTopRatedMovies(movieModels: List<MovieModel>) {
         topRatedMoviesAdapter.appendMovies(movieModels)
-        attachTopRatedMoviesOnScrollListener()
+        topRatedMoviesOnScrollListener()
     }
 
     private fun showUpcomingMovies(movieModels: List<MovieModel>) {
         upcomingMoviesAdapter.appendMovies(movieModels)
-        attachUpcomingMoviesOnScrollListener()
+        upcomingMoviesOnScrollListener()
     }
 
     private fun showMovieDetails(movieModel: MovieModel) {
