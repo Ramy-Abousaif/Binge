@@ -101,7 +101,8 @@
             android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@+id/movie_overview"
             app:layout_constraintLeft_toLeftOf="@+id/movie_overview"
-            app:layout_constraintRight_toRightOf="@+id/movie_overview" />
+            app:layout_constraintRight_toRightOf="@+id/movie_overview"
+            android:layout_marginTop="20dp"/>
 
         <RatingBar
             android:id="@+id/movie_rating_bar"
