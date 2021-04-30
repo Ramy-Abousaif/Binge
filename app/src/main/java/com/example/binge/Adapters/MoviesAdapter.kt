@@ -1,4 +1,4 @@
-package com.example.binge
+package com.example.binge.Adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.binge.Models.MovieModel
+import com.example.binge.R
 
 class MoviesAdapter(
     private var movieModels: MutableList<MovieModel>,

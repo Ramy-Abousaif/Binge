@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.binge.*
 import com.example.binge.Activities.*
+import com.example.binge.Adapters.MoviesAdapter
 import com.example.binge.Models.MovieModel
 import com.squareup.picasso.Picasso
 
@@ -65,15 +66,15 @@ class BingeFragment: Fragment(), View.OnClickListener {
             R.id.button_binge -> {
                 snackText.setText(snacks[(0..(snacks.size - 1)).random()])
                 getRandomMovies()
-                posterPath = (MoviesRepository.randomMoviePoster())
+                posterPath = (MoviesRepo.randomMoviePoster())
                 Picasso.get().load("https://image.tmdb.org/t/p/w342$posterPath").into(poster)
-                movieText.text = (MoviesRepository.randomMovieTitle())
+                movieText.text = (MoviesRepo.randomMovieTitle())
             }
         }
     }
 
     private fun getRandomMovies() {
-        MoviesRepository.getRandomMovies(
+        MoviesRepo.getRandomMovies(
             ::generateMovie,
             ::onError
         )

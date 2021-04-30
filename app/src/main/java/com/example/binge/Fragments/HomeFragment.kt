@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.binge.*
 import com.example.binge.Activities.*
+import com.example.binge.Adapters.MoviesAdapter
 import com.example.binge.Models.MovieModel
 
 class HomeFragment : Fragment() {
@@ -82,7 +83,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun getPopularMovies() {
-        MoviesRepository.getPopularMovies(
+        MoviesRepo.getPopularMovies(
             popularMoviesPage,
             ::onPopularMoviesFetched,
             ::onError
@@ -90,7 +91,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun getTopRatedMovies() {
-        MoviesRepository.getTopRatedMovies(
+        MoviesRepo.getTopRatedMovies(
             topRatedMoviesPage,
             ::onTopRatedMoviesFetched,
             ::onError
@@ -98,7 +99,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun getUpcomingMovies() {
-        MoviesRepository.getUpcomingMovies(
+        MoviesRepo.getUpcomingMovies(
             upcomingMoviesPage,
             ::onUpcomingMoviesFetched,
             ::onError
