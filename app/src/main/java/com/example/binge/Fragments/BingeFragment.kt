@@ -10,14 +10,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.binge.*
 import com.example.binge.Activities.*
 import com.example.binge.Extras.MoviesRepo
 import com.example.binge.Models.MovieModel
-import com.squareup.picasso.Picasso
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class BingeFragment: Fragment(), View.OnClickListener {
 
+    private var generating: Boolean = false
     private lateinit var snackText: TextView
     private lateinit var movieText: TextView
     private lateinit var poster: ImageView
@@ -38,7 +44,7 @@ class BingeFragment: Fragment(), View.OnClickListener {
         "Something tangy or sour would suffice for this one!",
         "Grab a soda and enjoy the show!",
         "A bunch of cookies would go well with this",
-        "Yoooo Hot Dog?",
+        "Yoooo Hot Dogs?",
         "Maybe grab a Cheeseburger?",
         "Maybe you should order in for this one"
         )
@@ -62,11 +68,27 @@ class BingeFragment: Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.button_binge -> {
-                snackText.setText(snacks[(0..(snacks.size - 1)).random()])
-                getRandomMovies()
-                posterPath = (MoviesRepo.randomMoviePoster())
-                Picasso.get().load("https://image.tmdb.org/t/p/w342$posterPath").into(poster)
-                movieText.text = (MoviesRepo.randomMovieTitle())
+                if(!generating)
+                {
+                    lifecycleScope.launch {
+                        repeat(20)
+                        {
+                            generating = true
+                            snackText.setText(snacks[(0..(snacks.size - 1)).random()])
+                            getRandomMovies()
+                            posterPath = (MoviesRepo.randomMoviePoster())
+                            Glide.with(poster)
+                                    .load("https://image.tmdb.org/t/p/w342$posterPath")
+                                    .into(poster)
+                            movieText.text = (MoviesRepo.randomMovieTitle())
+                            if(it >= 19)
+                            {
+                                generating = false
+                            }
+                            delay(100)
+                        }
+                    }
+                }
             }
         }
     }
